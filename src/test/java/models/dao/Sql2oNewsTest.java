@@ -116,7 +116,7 @@ public class Sql2oNewsTest {
 
 
     @After
-    public void tearDown(){
+    public void tearDown() throws  Exception{
         System.out.println("Clearing the database");
         sql2oNews.deleteAll();
     }

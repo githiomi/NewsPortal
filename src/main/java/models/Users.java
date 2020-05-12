@@ -1,7 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Users {
@@ -10,14 +8,14 @@ public class Users {
     private String name;
     private String gender;
     private String position;
-    private List<String> roles;
+    private String role;
     private int departmentid;
 
-    public Users(String name, String gender, String position, List roles, int departmentid) {
+    public Users(String name, String gender, String position, String role, int departmentid) {
         this.name = name;
         this.gender = gender;
         this.position = position;
-        this.roles = new ArrayList();
+        this.role = role;
         this.departmentid = departmentid;
     }
 
@@ -53,12 +51,12 @@ public class Users {
         this.position = position;
     }
 
-    public List getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getDepartmentid() {
@@ -74,16 +72,15 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return id == users.id &&
-                departmentid == users.departmentid &&
+        return departmentid == users.departmentid &&
                 name.equals(users.name) &&
                 gender.equals(users.gender) &&
                 position.equals(users.position) &&
-                roles.equals(users.roles);
+                role.equals(users.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, gender, position, roles, departmentid);
+        return Objects.hash(name, gender, position, role, departmentid);
     }
 }

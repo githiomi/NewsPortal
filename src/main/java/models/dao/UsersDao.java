@@ -19,7 +19,7 @@ public interface UsersDao {
     Users findById(int id);
 
 //    Update a user's info
-//    void update(String name, String position, List<String> roles, int departmentid);
+    void update(int id, String name, String position, String role, int departmentid);
 
 //    delete
     void deleteById(int id);

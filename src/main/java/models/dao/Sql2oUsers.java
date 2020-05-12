@@ -14,14 +14,14 @@ public class Sql2oUsers implements UsersDao {
     }
 
     @Override
-    public void add(Users users){
+    public void add(Users user){
         String sql = "INSERT INTO users (name, gender, position, role, departmentid) VALUES (:name, :gender, :position, :role, :departmentid);";
         try (Connection conn = sql2o.open()){
             int id = (int) conn.createQuery(sql, true)
-                    .bind(users)
+                    .bind(user)
                     .executeUpdate()
                     .getKey();
-            users.setId(id);
+            user.setId(id);
         }
         catch (Sql2oException ex){
             System.out.println(ex);
@@ -56,6 +56,20 @@ public class Sql2oUsers implements UsersDao {
         try (Connection conn = sql2o.open()){
             return conn.createQuery(sql, true)
                     .executeAndFetch(Users.class);
+        }
+    }
+
+    @Override
+    public void update(int id, String name, String position, String role, int departmentid){
+        String sql = "UPDATE users SET (name, position, role, departmentid) = (:name, :position, :role, :departmentid) WHERE id = :id;";
+        try (Connection conn = sql2o.open()){
+            conn.createQuery(sql, true)
+                    .addParameter("id", id)
+                    .addParameter("name", name)
+                    .addParameter("position", position)
+                    .addParameter("role", role)
+                    .addParameter("departmentid", departmentid)
+                    .executeUpdate();
         }
     }
 
