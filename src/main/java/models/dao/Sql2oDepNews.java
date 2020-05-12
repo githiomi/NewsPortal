@@ -1,6 +1,7 @@
 package models.dao;
 
 import models.DepNews;
+import models.News;
 import org.sql2o.*;
 
 import java.util.List;
@@ -52,11 +53,11 @@ public class Sql2oDepNews implements DepNewsDao{
 
     @Override
     public List<DepNews> getAllNewsForDepartment(int departmentid){
-        String sql = "SELECT * FROM news WHERE id = :id AND type = 'Department';";
+        String sql = "SELECT * FROM news WHERE departmentid = :departmentid AND type = 'Department';";
         try (Connection conn = sql2o.open()){
             return conn.createQuery(sql, true)
                     .throwOnMappingFailure(false)
-                    .addParameter("id", departmentid)
+                    .addParameter("departmentid", departmentid)
                     .executeAndFetch(DepNews.class);
         }
     }

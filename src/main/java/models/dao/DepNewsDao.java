@@ -14,7 +14,6 @@ public interface DepNewsDao {
     List<DepNews> getAllNewsForDepartment(int departmentid);
     List<DepNews> getAllDep();
 
-
 //    find an object
     DepNews findByIdDep(int id);
 
