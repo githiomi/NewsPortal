@@ -43,10 +43,10 @@ public class NewsTest {
 
 //    Helper classes
     public static News setUpNews(){
-        return new News("Tech", "Company", "Urgent", "Make sure to submit all commits", 1);
+        return new News("Tech", "Urgent", "Make sure to submit all commits", 1);
     }
 
     public static News setUpAltNews(){
-        return new News("Human Resource", "Company", "Not urgent", "Do not harass the other staff", 1);
+        return new News("Human Resource", "Not urgent", "Do not harass the other staff", 1);
     }
 }

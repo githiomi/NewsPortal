@@ -1,8 +1,7 @@
 package models.dao;
 
-import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
+import models.DepNews;
 import models.News;
-import org.h2.util.New;
 import org.junit.*;
 import org.sql2o.*;
 
@@ -132,14 +131,14 @@ public class Sql2oNewsTest {
 
     //    Helper classes
     public static News setUpNews(){
-        return new News("Tech", "Company", "Urgent", "Make sure to submit all commits", 1);
+        return new News("Tech", "Urgent", "Make sure to submit all commits", 1);
     }
 
     public static News setUpAltNews(){
-        return new News("Human Resource", "Company", "Not urgent", "Do not harass the other staff", 1);
+        return new News("Human Resource", "Not urgent", "Do not harass the other staff", 1);
     }
 
-    public static News setUpDepNews() {
-        return new News("Human Resource", "Department", "Not urgent", "Do not harass the other staff", 1);
+    public static DepNews setUpDepNews() {
+        return new DepNews("Human Resource",  "Not urgent", "Do not harass the other staff", 1, 1);
     }
 }

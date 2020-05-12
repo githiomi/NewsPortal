@@ -42,7 +42,7 @@ public class Sql2oNews implements NewsDao{
 
     @Override
     public List<News> getAll(){
-        String sql = "SELECT * FROM news";
+        String sql = "SELECT * FROM news WHERE type = 'Company';";
         try (Connection conn = sql2o.open()){
             return conn.createQuery(sql)
                     .throwOnMappingFailure(false)
@@ -62,7 +62,7 @@ public class Sql2oNews implements NewsDao{
 
     @Override
     public void deleteById(int id){
-        String sql = "DELETE FROM news WHERE id = :id;";
+        String sql = "DELETE FROM news WHERE id = :id AND type = 'Company';";
         try (Connection conn = sql2o.open()){
             conn.createQuery(sql)
                     .addParameter("id", id)
@@ -72,7 +72,7 @@ public class Sql2oNews implements NewsDao{
 
     @Override
     public void deleteAll(){
-        String sql = "DELETE FROM news *;";
+        String sql = "DELETE FROM news * WHERE type = 'Company';";
         try (Connection conn = sql2o.open()){
             conn.createQuery(sql)
                     .executeUpdate();

@@ -18,9 +18,9 @@ public class News {
     public static final String COMPANY_TYPE = "Company";
     public static final String dateFormat = "E dd/MM/yyyy @ K:mm a";
 
-    public News(String title, String type, String urgency, String content, int userid) {
+    public News(String title, String urgency, String content, int userid) {
         this.title = title;
-        this.type = type;
+        this.type = COMPANY_TYPE;
         this.urgency = urgency;
         this.content = content;
         this.createdat = System.currentTimeMillis();
