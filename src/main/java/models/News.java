@@ -13,17 +13,19 @@ public class News {
     public String content;
     public long createdat;
     public String formattedCreatedat;
+    public int userid;
 
     public static final String COMPANY_TYPE = "Company";
     public static final String dateFormat = "E dd/MM/yyyy @ K:mm a";
 
-    public News(String title, String type, String urgency, String content, long createdat) {
+    public News(String title, String type, String urgency, String content, int userid) {
         this.title = title;
-        this.type = COMPANY_TYPE;
+        this.type = type;
         this.urgency = urgency;
         this.content = content;
         this.createdat = System.currentTimeMillis();
         setFormattedCreatedat();
+        this.userid = userid;
     }
 
     public int getId() {
@@ -94,7 +96,6 @@ public class News {
         if (o == null || getClass() != o.getClass()) return false;
         News news = (News) o;
         return id == news.id &&
-                createdat == news.createdat &&
                 title.equals(news.title) &&
                 type.equals(news.type) &&
                 urgency.equals(news.urgency) &&
