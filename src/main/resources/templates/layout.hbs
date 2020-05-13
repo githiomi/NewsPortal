@@ -1,0 +1,60 @@
+<head>
+    <title>
+        DHOSIO CO-OP
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="Images/icon.png">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+<body>
+
+{{#block "nav-bar"}}
+    <ul class="nav nav-tabs" style="font-family:Monospace">
+
+        <li role="presentation" class="active"><a href="/homepage">HOME</a></li>
+        <li role="presentation" class="active"><a href="/departments">DEPARTMENTS</a></li>
+        <li role="presentation" class="active"><a href="/eAnimals">ARTICLES</a></li>
+
+    </ul>
+{{/block}}
+
+<div class="container">
+    <!--begin main template-->
+    <div class="page-header" style="text-align:center;">
+        <div class="jumbotron">
+
+            <h1> DHOSIO CO-OP </h1>
+            <small style="text-align:center, font-weight:bolder;"> Meeting All Your Tech Needs Is Our Priority </small>
+
+        </div>
+
+        <h1>
+            {{#block "pagename"}}
+
+            {{/block}}
+        </h1>
+    </div>
+
+    <div class="col-md-12">
+
+        {{#block "content"}}
+
+        {{/block}}
+
+    </div>
+</div>
+<!--end main template-->
+{{#block "footer"}}
+    <br>
+    <footer class="footer">
+
+        <div class="container">
+            {{#block "buttons"}} {{/block}}
+        </div>
+    </footer>
+
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </html>
+{{/block}}
