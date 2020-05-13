@@ -21,4 +21,15 @@ public class Sql2oDepartmentsDao {
         }
     }
 
+    public Departments findById(int id){
+        String sql = "SELECT * FROM departments WHERE id = :id;";
+        try (Connection conn = sql2o.open()){
+            Departments departments = conn.createQuery(sql, true)
+                    .throwOnMappingFailure(false)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Departments.class);
+            return departments;
+        }
+    }
+
 }
