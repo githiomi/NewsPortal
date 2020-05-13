@@ -88,8 +88,16 @@ public class App {
 
         get("/departments/:id", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            int id = Integer.parseInt(req.params())
-        });
+            int id = Integer.parseInt(req.params(":id"));
+
+            Departments departments = sql2oDepartments.findById(id);
+            int users = usersDao.getAllInDepartment(id).size();
+
+            model.put("departments", departments);
+            model.put("users", users);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "departmentdetails.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("/home/:id", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
