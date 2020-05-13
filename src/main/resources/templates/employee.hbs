@@ -1,0 +1,31 @@
+{{#partial "pagename"}}
+    {{username}}, these are {{user.name}}'s details
+{{/partial}}
+
+{{#partial "content"}}
+
+         <div style="height:80px; width:80px; border-radius:100%; margin:10px;">
+             {{#if male}}
+                 <img src="public/images/male.png">
+             {{else}}
+                 <img src="images/female.png">
+             {{/if}}
+         </div>
+
+         <ul>
+             <li>Employee name: {{user.name}}</li>
+             <li>Gender: {{user.gender}}</li>
+             <li>Position: {{user.position}}</li>
+             <li>Role: {{user.role}}</li>
+         </ul>
+    <hr>
+    
+{{/partial}}
+
+{{#partial "buttons"}}
+    <form action="/departments/{{department.id}}/users/{{user.id}}/delete" method="post">
+        <button type="submit" class="btn btn-danger">Delete {{user.name}}</button>
+    </form>
+{{/partial}}
+
+{{>layout.hbs}}
