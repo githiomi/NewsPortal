@@ -1,5 +1,5 @@
 {{#partial "pagename"}}
-    These are the details for the {{title}} news item.
+    {{username}}, these are the details for the <span style="font-weight:bold;"> {{news.title}} </span> news item.
 {{/partial}}
 
 {{#partial "content"}}
@@ -8,17 +8,23 @@
         <hr>
 
         <ul>
-            <li>News title: {{title}}</li>
-            <li>Addressed to: {{type}}</li>
-            <li>Urgency: {{urgency}}</li>
+            <li>News title: {{news.title}}</li>
+            <li>Addressed to: {{news.type}}</li>
+            <li>Urgency: {{news.urgency}}</li>
             <br>
             <li>Posted by: {{users.name}}</li>
-            <li>Posted on: {{formattedCreatedat}}</li>
+            <li>Posted on: {{news.formattedCreatedat}}</li>
         </ul>
 
         <hr>
     </div>
 
+{{/partial}}
+
+{{#partial "buttons"}}
+    <form action="/news/{{news.id}}/delete" method="post">
+        <button type="submit" class="btn btn-danger"> Delete {{news.title}} </button>
+    </form>
 {{/partial}}
 
 {{>layout.hbs}}

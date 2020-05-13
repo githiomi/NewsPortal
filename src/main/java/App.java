@@ -58,7 +58,7 @@ public class App {
 
         }, new HandlebarsTemplateEngine());
 
-        get("/home", "aaplication/json", (req, res) -> {
+        get("/home", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
             List<Departments> allDepartments = sql2oDepartments.getAll();
@@ -86,7 +86,12 @@ public class App {
             return new ModelAndView(model, "departments.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/news/:id", "application/json", (req, res) -> {
+        get("/departments/:id", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int id = Integer.parseInt(req.params())
+        });
+
+        get("/home/:id", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int id = Integer.parseInt(req.params(":id"));
 
@@ -97,6 +102,21 @@ public class App {
             model.put("users", users);
             model.put("username", req.session().attribute("username"));
             return  new ModelAndView(model, "news.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/news/:id/delete", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int id = Integer.parseInt(req.params(":id"));
+
+            newsDao.deleteById(id);
+
+            List<Departments> allDepartments = sql2oDepartments.getAll();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("departments", allDepartments);
+            res.redirect("/home");
+            return null;
         }, new HandlebarsTemplateEngine());
 
     }
