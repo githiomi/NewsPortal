@@ -92,9 +92,11 @@ public class App {
 
             Departments departments = sql2oDepartments.findById(id);
             int users = usersDao.getAllInDepartment(id).size();
+            List<Users> allUsers = usersDao.getAllInDepartment(id);
 
             model.put("departments", departments);
-            model.put("users", users);
+            model.put("users", allUsers);
+            model.put("employees", users);
             model.put("username", req.session().attribute("username"));
             return new ModelAndView(model, "departmentdetails.hbs");
         }, new HandlebarsTemplateEngine());
@@ -125,6 +127,42 @@ public class App {
             model.put("departments", allDepartments);
             res.redirect("/home");
             return null;
+        }, new HandlebarsTemplateEngine());
+
+        get("/companynews/new", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Users> allUsers = usersDao.getAll();
+
+            model.put("users", allUsers);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "newcompanynews.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/companynews", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            String title = req.queryParams("title");
+            String urgency = req.queryParams("urgency");
+            String content = req.queryParams("content");
+            int userid = Integer.parseInt(req.queryParams("userid"));
+
+            News news = new News(title, urgency, content, userid);
+            newsDao.add(news);
+
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "companynews.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/companynews", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "companynews.hbs");
         }, new HandlebarsTemplateEngine());
 
     }

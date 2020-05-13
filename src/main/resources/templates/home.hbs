@@ -18,28 +18,22 @@
     {{/each}}
 
     {{#if news}}
-        <h3> <small style="text-align:center; padding: 5px; border-bottom:2px solid teal;"> These are the Company News: </small> </h3>
-        {{#each news}}
-            <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
-            <ol style="margin:8px;">
-                <li style="margin:8px;"> News Title: {{title}}
-                    <ul>
-                        <li> Urgency: {{urgency}} </li>
-                        <br>
-                        <a href="/home/{{id}}"> View details here...</a>
-                    </ul>
-                </li>
-                <hr>
-            </ol>
-            </div>
-        {{/each}}
+        <h3> <small style="text-align:center; padding: 5px; border-bottom:2px solid teal;"> You Do Have Company News: </small> </h3>
+
+        <div style="margin:10px;">
+            <a href="/companynews"> <button class="btn btn-default"> View company news </button> </a>
+        </div>
+
+        <br>
+        <a href="/companynews/new"> <button class="btn btn-primary"> Add News Item </button> </a>
+
     {{else}}
         <small>
             Sorry, There are no news to report to the Whole Company.
             <br><br>
             Be the first to notify everyone of something new!
             <br>
-            <a href="/news/new"> <button class="btn btn-primary"> Add News </button> </a>
+            <a href="/companynews/new"> <button class="btn btn-primary"> Add News Item </button> </a>
         </small>
     {{/if}}
 

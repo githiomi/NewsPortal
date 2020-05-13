@@ -10,7 +10,25 @@
     <br>
     <br>
         <hr>
-            {{departments.name}} has a total of {{users}} employees.
+            {{departments.name}} has a total of {{employees}} employees. They are:
+
+        {{#if users}}
+            {{#each users}}
+                <ol>
+                    <li> Name: {{users.name}}</li>
+                        <br><br>
+                    <a href="/departments/{{departments.id}}/users/{{users.id}}"> View {{users.name}} details here ... </a>
+                </ol>
+            {{/each}}
+        {{else}}
+            {{username}}, as an admin, you can add an employee here
+            <a href="/departments/{{departments.id}}/users/new"> <button class="btn btn-primary"> Add an employee </button> </a>
+        {{/if}}
+
+{{/partial}}
+
+{{#partial "buttons"}}
+    <a href="/home"> <button class="btn btn-default"> Back Home </button> </a>
 {{/partial}}
 
 
