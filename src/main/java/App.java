@@ -1,6 +1,8 @@
 
 import com.google.gson.Gson;
+import models.Departments;
 import models.dao.Sql2oDepNews;
+import models.dao.Sql2oDepartments;
 import models.dao.Sql2oNews;
 import models.dao.Sql2oUsers;
 import org.sql2o.*;
@@ -21,6 +23,7 @@ public class App {
         Sql2oNews newsDao;
         Sql2oDepNews depNewsDao;
         Sql2oUsers usersDao;
+        Sql2oDepartments sql2oDepartments;
         Connection conn;
         Gson gson = new Gson();
 
@@ -29,6 +32,7 @@ public class App {
         newsDao = new Sql2oNews(sql2o);
         depNewsDao = new Sql2oDepNews(sql2o);
         usersDao = new Sql2oUsers(sql2o);
+        sql2oDepartments = new Sql2oDepartments(sql2o);
         conn = sql2o.open();
 
         post("/home", "application/json", (req, res) -> {
@@ -53,6 +57,17 @@ public class App {
             model.put("username", req.session().attribute("username"));
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("/departments", "application/json", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+
+            res.type("application/json");
+            return gson.toJson(sql2oDepartments.getAll());
+
+//            model.put("username", req.session().attribute("username"));
+//            model.put("departments", gson.toJson(sql2oDepartments.getAll()));
+//            return new ModelAndView(model, "departments.hbs");
+        });
 
     }
 

@@ -9,16 +9,16 @@ import org.sql2o.*;
 
 import static org.junit.Assert.*;
 
-public class Sql2oDepartmentsDaoTest {
+public class Sql2ODepartmentsTest {
 
-    private static Sql2oDepartmentsDao sql2oDepartmentsDao;
+    private static Sql2oDepartments sql2oDepartmentsDao;
     private static Connection conn;
 
     @BeforeClass
     public static void setUp() {
         String connectionString = "jdbc:postgresql://localhost:5432/newsportal_test";
         Sql2o sql2o = new Sql2o(connectionString, "dhosio", "MaFaD@niel2019");
-        sql2oDepartmentsDao = new Sql2oDepartmentsDao(sql2o);
+        sql2oDepartmentsDao = new Sql2oDepartments(sql2o);
         conn = sql2o.open();
     }
 
