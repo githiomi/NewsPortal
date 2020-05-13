@@ -76,6 +76,10 @@ public class News {
         this.createdat = System.currentTimeMillis();
     }
 
+    public int getUserid(){
+        return userid;
+    }
+
     public String getFormattedCreatedat() {
         Date date = new Date(createdat);
         String format = dateFormat;

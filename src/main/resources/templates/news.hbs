@@ -1,0 +1,24 @@
+{{#partial "pagename"}}
+    These are the details for the {{title}} news item.
+{{/partial}}
+
+{{#partial "content"}}
+
+    <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
+        <hr>
+
+        <ul>
+            <li>News title: {{title}}</li>
+            <li>Addressed to: {{type}}</li>
+            <li>Urgency: {{urgency}}</li>
+            <br>
+            <li>Posted by: {{users.name}}</li>
+            <li>Posted on: {{formattedCreatedat}}</li>
+        </ul>
+
+        <hr>
+    </div>
+
+{{/partial}}
+
+{{>layout.hbs}}

@@ -1,6 +1,8 @@
 
 import com.google.gson.Gson;
 import models.Departments;
+import models.News;
+import models.Users;
 import models.dao.Sql2oDepNews;
 import models.dao.Sql2oDepartments;
 import models.dao.Sql2oNews;
@@ -46,9 +48,25 @@ public class App {
                 model.put("username", req.session().attribute("username"));
             }
 
+            List<Departments> allDepartments = sql2oDepartments.getAll();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("departments", allDepartments);
             model.put("username", req.session().attribute("username"));
             return new ModelAndView(model, "home.hbs");
 
+        }, new HandlebarsTemplateEngine());
+
+        get("/home", "aaplication/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            List<Departments> allDepartments = sql2oDepartments.getAll();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("departments", allDepartments);
+            return new ModelAndView(model, "home.hbs");
         }, new HandlebarsTemplateEngine());
 
         get("/", "application/json", (req, res) -> {
@@ -59,15 +77,27 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         get("/departments", "application/json", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
 
-            res.type("application/json");
-            return gson.toJson(sql2oDepartments.getAll());
+            List<Departments> allDepartments = sql2oDepartments.getAll();
 
-//            model.put("username", req.session().attribute("username"));
-//            model.put("departments", gson.toJson(sql2oDepartments.getAll()));
-//            return new ModelAndView(model, "departments.hbs");
-        });
+            model.put("username", req.session().attribute("username"));
+            model.put("departments", allDepartments);
+            return new ModelAndView(model, "departments.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/news/:id", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int id = Integer.parseInt(req.params(":id"));
+
+            News retrieved = newsDao.findById(id);
+            Users users = usersDao.findById(retrieved.getUserid());
+
+            model.put("news", retrieved);
+            model.put("users", users);
+            model.put("username", req.session().attribute("username"));
+            return  new ModelAndView(model, "news.hbs");
+        }, new HandlebarsTemplateEngine());
 
     }
 

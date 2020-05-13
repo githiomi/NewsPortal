@@ -3,7 +3,46 @@
 {{/partial}}
 
 {{#partial "content"}}
-    <h1 style="text-align:center; padding: 5px; border-bottom:2px solid teal;"> These are our departments: </h1>
+    <h1> These are our departments: </h1>
+
+    {{#each departments}}
+        <ul>
+
+            <li> {{name}}
+                <br>
+                <a href="/departments/{{id}}"> <button style="margin:5px;" class="btn btn-default"> View {{name}} department </button> </a>
+            </li>
+
+            <hr>
+        </ul>
+    {{/each}}
+
+    {{#if news}}
+        <h3> <small style="text-align:center; padding: 5px; border-bottom:2px solid teal;"> These are the Company News: </small> </h3>
+        {{#each news}}
+            <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
+            <ol style="margin:8px;">
+                <li style="margin:8px;"> News Title: {{title}}
+                    <ul>
+                        <li> Urgency: {{urgency}} </li>
+                        <li> Posted: {{formattedCreatedat}} </li>
+<!--                        <li> Content: <p> {{content}} </p> </li>-->
+                        <a href="/news/{{id}}"> View details here...</a>
+                    </ul>
+                </li>
+                <hr>
+            </ol>
+            </div>
+        {{/each}}
+    {{else}}
+        <small>
+            Sorry, There are no news to report to the Whole Company.
+            <br><br>
+            Be the first to notify everyone of something new!
+            <br>
+            <a href="/news/new"> <button class="btn btn-primary"> Add News </button> </a>
+        </small>
+    {{/if}}
 
 {{/partial}}
 
