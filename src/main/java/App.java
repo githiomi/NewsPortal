@@ -78,7 +78,7 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("departments", "application/json", (req, res) -> {
+        get("/departments", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
             List<Departments> allDepartments = sql2oDepartments.getAll();
@@ -128,6 +128,15 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        get("companynews/new", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+
+            List<Users> allUsers = usersDao.getAll();
+
+            model.put("users", allUsers);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "newcompanynews.hbs");
+        }, new HandlebarsTemplateEngine());
 
         get("companynews/:id", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -153,7 +162,7 @@ public class App {
 
             model.put("news", allNews);
             model.put("departments", allDepartments);
-            res.redirect("/home");
+            res.redirect("/companynews");
             return null;
         }, new HandlebarsTemplateEngine());
 
@@ -181,18 +190,9 @@ public class App {
 
             model.put("news", allNews);
             model.put("username", req.session().attribute("username"));
-            return new ModelAndView(model, "companynews.hbs");
+            res.redirect("/companynews");
+            return null;
         }, new HandlebarsTemplateEngine());
-
-//        get("/companynews/new", "application/json", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//
-//            List<Users> allUsers = usersDao.getAll();
-//
-//            model.put("users", allUsers);
-//            model.put("username", req.session().attribute("username"));
-//            return new ModelAndView(model, "newcompanynews.hbs");
-//        }, new HandlebarsTemplateEngine());
 
         get("/departments/:ic/users/:id", "application/json", (req, res) -> {
             Map<String,Object> model = new HashMap<>();

@@ -1,6 +1,6 @@
 {{#partial "pagename"}}
     {{username}}, from here you can add a new News.
-    <br>
+    <br><br>
     <small style="text-align:center;"> It will be viewed by everyone </small>
 {{/partial}}
 
@@ -9,14 +9,14 @@
     <div id="body" class="bg-dark">
         <div class="col-md-8" style="margin-left:20%; border-radius:15px; background-color:teal; text-align:center">
             <br>
-            <small style="border-bottom:2px solid teal; padding:5px;"> Add News Item Here </small>
+            <small style="border-bottom:2px solid teal; padding:5px;"> Add Company News Item Here </small>
             <hr>
 
             <form action="/companynews" method="post">
 
                 <div class="form-group">
                     <label for="title"> News Title: </label>
-                    <input id="title" name="title" value="{{news.title}}" style="padding:5px; width:50%;">
+                    <input id="title" name="title" style="padding:5px; width:50%;">
                 </div>
 
                 <label for="urgency"> Urgency: </label>
@@ -29,16 +29,16 @@
 
                 <div style="margin:8px;" class="form-group">
                     <label for="content"> News Content: </label>
-                    <textarea id="content" name="content" value="{{news.content}}" style="padding:5px; width:50%;"></textarea>
+                    <textarea id="content" name="content" style="padding:5px; width:50%;"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="userid"> Created By: </label>
                         {{#if users}}
-                          <select id="userid" name="userid" value="{{news.userid}}" style="padding:5px; width:50%;">
+                          <select id="userid" name="userid" style="padding:5px; width:50%;">
                             <option value=""></option>
                             {{#each users}}
-                                <option value="{{users.id}}">{{users.name}}</option>
+                                <option value="{{id}}">{{name}}</option>
                             {{/each}}
                           </select>
                         {{else}}
@@ -57,7 +57,7 @@
 {{/partial}}
 
 {{#partial "buttons"}}
-    <a href="/home"> <button class="bt btn-danger"> Go bach home </button> </a>
+    <a href="/home"> <button class="btn btn-danger"> Go bach home </button> </a>
 {{/partial}}
 
 {{>layout.hbs}}
