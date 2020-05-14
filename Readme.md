@@ -3,6 +3,8 @@
  This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
 
  Created By: Daniel Githiomi
+ 
+ Visit [MyTrello](https://trello.com/b/GhxGOAFL/organisational-news-portal) to see what my app can do
 
 ## Screenshots
 
