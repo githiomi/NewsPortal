@@ -1,5 +1,6 @@
 
 import com.google.gson.Gson;
+import models.DepNews;
 import models.Departments;
 import models.News;
 import models.Users;
@@ -102,6 +103,32 @@ public class App {
             return new ModelAndView(model, "departmentdetails.hbs");
         }, new HandlebarsTemplateEngine());
 
+        post("/departments/:id", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int id = Integer.parseInt(req.params(":id"));
+
+            String name = req.queryParams("name");
+            String gender = req.queryParams("gender");
+            String position = req.queryParams("position");
+            String role = req.queryParams("role");
+            int depId = Integer.parseInt(req.queryParams("departmentid"));
+
+            Users newUser = new Users(name, gender, position, role, depId);
+            usersDao.add(newUser);
+
+            Departments departments = sql2oDepartments.findById(id);
+            int users = usersDao.getAllInDepartment(id).size();
+            List<Users> allUsers = usersDao.getAllInDepartment(id);
+
+            model.put("departments", departments);
+            model.put("users", allUsers);
+            model.put("employees", users);
+            model.put("username", req.session().attribute("username"));
+            res.redirect("/departments/" + id);
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+
         get("companynews/:id", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int id = Integer.parseInt(req.params(":id"));
@@ -167,7 +194,7 @@ public class App {
 //            return new ModelAndView(model, "newcompanynews.hbs");
 //        }, new HandlebarsTemplateEngine());
 
-        get("departments/:ic/users/:id", "application/json", (req, res) -> {
+        get("/departments/:ic/users/:id", "application/json", (req, res) -> {
             Map<String,Object> model = new HashMap<>();
             int depId = Integer.parseInt(req.params("ic"));
             int userid = Integer.parseInt(req.params("id"));
@@ -196,7 +223,7 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-        get("departments/:id/users/new", "application/json", (req, res) -> {
+        get("/departments/:id/users", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int depId = Integer.parseInt(req.params("id"));
 
@@ -205,6 +232,19 @@ public class App {
             model.put("departments", retrieved);
             model.put("username", req.session().attribute("username"));
             return new ModelAndView(model, "newemployee.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/departments/:id/news", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params(":id"));
+
+            Departments departments = sql2oDepartments.findById(depId);
+            List<DepNews> allDepNews = depNewsDao.getAllNewsForDepartment(depId);
+
+            model.put("depNews", allDepNews);
+            model.put("departments", departments);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "depNews.hbs");
         }, new HandlebarsTemplateEngine());
 
     }

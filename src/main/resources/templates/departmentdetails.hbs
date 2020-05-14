@@ -19,21 +19,24 @@
             <br>
             {{#each users}}
                 <ol style="padding:3px;">
-                    <li> Name: {{name}}</li>
+                    <li> Name: {{name}}
                         <br>
-                    <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a>
+                        <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a>
+                    </li>
                 </ol>
-                <br>
-                {{username}}, as an admin, you can add an employee here:
-                <br>
-                <a href="/departments/{{departments.id}}/users/new"> <button class="btn btn-primary"> Add an employee </button> </a>
             {{/each}}
+
+            <br>
+            {{username}}, as an admin, you can add an employee here:
+            <br>
+            <a href="/departments/{{departments.id}}/users"> <button class="btn btn-primary"> Add an employee </button> </a>
+
         {{else}}
             <br>
             <br>
             {{username}}, as an admin, you can add an employee here:
             <br>
-            <a href="/departments/{{departments.id}}/users/new"> <button class="btn btn-primary"> Add an employee </button> </a>
+            <a href="/departments/{{departments.id}}/users"> <button class="btn btn-primary"> Add an employee </button> </a>
         {{/if}}
 
 {{/partial}}
