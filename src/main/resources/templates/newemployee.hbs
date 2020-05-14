@@ -1,0 +1,51 @@
+{{#partial "pagename"}}
+    {{username}}, from here you can add a new employee
+{{/partial}}
+
+{{#partial "content"}}
+
+    <div id="body" class="bg-dark">
+        <div class="col-md-8" style="margin-left:20%; border-radius:15px; background-color:teal; text-align:center">
+            <br>
+            <small style="border-bottom:2px solid teal; padding:5px;"> Add News Item Here </small>
+            <hr>
+
+            <form action="/departments/{{departments.id}}/users/new" method="post">
+
+                <div class="form-group">
+                    <label for="name"> Employee Name: </label>
+                    <input id="name" name="name" style="padding:5px; width:50%;">
+                </div>
+
+                <label for="gender"> Employee gender: </label>
+                <select id="gender" name="gender" style="padding:5px; width:50%;">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <div style="margin:8px;" class="form-group">
+                    <label for="position"> Employee Position:: </label>
+                    <input id="position" name="position" style="padding:5px; width:50%;">
+                </div>
+
+                <div class="form-group">
+                    <label for="role"> Employee Role: </label>
+                    <input id="role" name="role" style="padding:5px; width:50%;">
+                </div>
+
+                <div class="form-group">
+                    <label for="departmentid"> Employee Department: </label>
+                    <input id="departmentid" name="departmentid" value="{{id}}" placeholder="{{name}}" style="padding:5px; width:50%;">
+                </div>
+
+                <button type="submit" class="btn btn-default"> Submit </button>
+            </form>
+
+        </div>
+    </div>
+
+
+{{/partial}}
+
+{{>layout.hbs}}
