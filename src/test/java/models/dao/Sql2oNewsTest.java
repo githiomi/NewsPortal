@@ -131,7 +131,7 @@ public class Sql2oNewsTest {
 
     //    Helper classes
     public static News setUpNews(){
-        return new News("Tech", "Urgent", "Make sure to submit all commits", 1);
+        return new News("Tech", "Urgent", "Submit all reports before end of day", 1);
     }
 
     public static News setUpAltNews(){

@@ -1,0 +1,56 @@
+{{#partial "pagename"}}
+    {{username}}, from here you can add a new employee
+{{/partial}}
+
+{{#partial "content"}}
+
+    <div id="body" class="bg-dark">
+        <div class="col-md-8" style="margin-left:20%; border-radius:15px; background-color:teal; text-align:center">
+            <br>
+            <small style="border-bottom:2px solid teal; padding:5px;"> Add A New Employee Here </small>
+            <hr>
+
+            <form action="/departments/{{departments.id}}" method="post">
+
+                <div class="form-group">
+                    <label for="name"> Employee Name: </label>
+                    <input id="name" name="name" style="padding:5px; width:50%;">
+                </div>
+
+                <label for="gender"> Gender: </label>
+                <select id="gender" name="gender" style="padding:5px; width:50%;">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <div class="form-group">
+                    <label for="position"> Position: </label>
+                    <input id="position" name="position" style="padding:5px; width:50%;">
+                </div>
+
+                <div class="form-group">
+                    <label for="role"> Role: </label>
+                    <input id="role" name="role" style="padding:5px; width:50%;">
+                </div>
+
+                <div class="form-group">
+                    <label for="departmentid"> Department: </label>
+                    <select id="departmentid" name="departmentid" style="padding:5px; width:50%;">
+                            <option value="{{departments.id}}">{{departments.name}}</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-default"> Submit </button>
+            </form>
+
+        </div>
+    </div>
+
+{{/partial}}
+
+{{#partial "buttons"}}
+    <a href="/departments/{{departments.id}}"> <button class="btn btn-danger"> Go Back </button> </a>
+{{/partial}}
+
+{{>layout.hbs}}

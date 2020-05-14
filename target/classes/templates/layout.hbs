@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>
+        DHOSIO CO-OP
+    </title>
+
+    <link rel="icon" type="image/x-icon" href="/images/icon.png">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+{{#block "nav-bar"}}
+    <ul class="nav nav-tabs" style="font-family:Monospace">
+
+        <li role="presentation" class="active"><a href="/home">HOME</a></li>
+        <li role="presentation" class="active"><a href="/departments">DEPARTMENTS</a></li>
+        <li role="presentation" class="active"><a href="/companynews">COMPANY NEWS</a></li>
+
+    </ul>
+{{/block}}
+
+<div class="container">
+    <!--begin main template-->
+    <div class="page-header" style="text-align:center;">
+        <div class="jumbotron">
+
+            <h1> DHOSIO CO-OP </h1>
+            <img src="/images/header.jpeg" style="height:200px;">
+            <br>
+            <h3><small style="text-align:center, font-weight:bolder;"> Meeting All Your Tech Needs Is Our Priority </small> </h3>
+
+        </div>
+
+        <h1 style="text-align:center; padding: 5px; border-bottom:2px solid teal;"><small>
+            {{#block "pagename"}}
+
+            {{/block}}
+        </small></h1>
+    </div>
+
+    <div class="col-md-12">
+
+        {{#block "content"}}
+
+        {{/block}}
+
+    </div>
+</div>
+<!--end main template-->
+{{#block "footer"}}
+    <br>
+    <footer class="footer">
+
+        <div class="container">
+            {{#block "buttons"}} {{/block}}
+        </div>
+        <br>
+        <br>
+    </footer>
+
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </html>
+{{/block}}

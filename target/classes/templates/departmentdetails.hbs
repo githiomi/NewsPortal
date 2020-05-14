@@ -1,0 +1,52 @@
+{{#partial "pagename"}}
+    {{username}}, from here you can view {{departments.name}}'s details
+{{/partial}}
+
+{{#partial "content"}}
+    <h3>
+        Department name: {{departments.name}}
+
+        <a href="/departments/{{departments.id}}/news"> <button class="btn btn-default"> View {{departments.name}} news </button> </a>
+    </h3>
+
+    <br>
+        <hr>
+            {{departments.name}} has a total of {{employees}} employees.
+
+        {{#if users}}
+            <br>
+            They are as follows:
+            <br>
+            {{#each users}}
+                <ol style="padding:3px;">
+                    <li>
+                    Name: {{name}}
+                    <ul>
+                        <br>
+                        <li> <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a> </li>
+                    </ul>
+                    </li>
+                </ol>
+            {{/each}}
+
+            <br>
+            {{username}}, as an admin, you can add an employee here:
+            <br>
+            <a href="/departments/{{departments.id}}/users"> <button class="btn btn-primary"> Add an employee </button> </a>
+
+        {{else}}
+            <br>
+            <br>
+            {{username}}, as an admin, you can add an employee here:
+            <br>
+            <a href="/departments/{{departments.id}}/users"> <button class="btn btn-primary"> Add an employee </button> </a>
+        {{/if}}
+
+{{/partial}}
+
+{{#partial "buttons"}}
+    <a href="/home"> <button class="btn btn-default"> Back Home </button> </a>
+{{/partial}}
+
+
+{{>layout.hbs}}

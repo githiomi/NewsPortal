@@ -1,0 +1,39 @@
+{{#partial "pagename"}}
+    {{username}}, these are the news in {{departments.name}}
+{{/partial}}
+
+{{#partial "content"}}
+
+    <h3 style="padding:5px; border-bottom:2px solid teal">These are the news for employees in the {{departments.name}} department.</h3>
+
+    {{#if depNews}}
+        {{#each depNews}}
+            <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
+                <ol style="margin:8px;">
+                    <li style="margin:8px;"> News Title: {{title}}
+                        <ul>
+                            <li> Urgency: {{urgency}} </li>
+                            <br>
+                            <a href="/departments/{{departments.id}}/news/{{id}}"> View {{title}} details here...</a>
+                        </ul>
+                    </li>
+                    <hr>
+                </ol>
+            </div>
+        {{/each}}
+
+        <small> {{username}}, you can still add news to this department.<br>
+            <a href="/departments/{{departments.id}}/news/new"> <button class="btn btn-default"> Add News Item </button> </a>
+        </small>
+    {{else}}
+
+        <small> Looks like there are no news within this department <br><br>
+            Be the first to add some new! <br>
+            <a href="/departments/{{departments.id}}/news/new"> <button class="btn btn-default"> Add News Item </button> </a>
+        </small>
+
+    {{/if}}
+
+{{/partial}}
+
+{{>layout.hbs}}

@@ -61,7 +61,7 @@ public class Sql2oDepNewsTest {
 
         int depLength = sql2oDepNews.getAllDep().size();
         int compLength = sql2oNews.getAll().size();
-        assertEquals(2, depLength);
+        assertEquals(3, depLength);
         assertEquals(1, compLength);
     }
 

@@ -1,0 +1,21 @@
+{{#partial "pagename"}}
+    {{username}}, from here you can see all of our departments.
+{{/partial}}
+
+{{#partial "content"}}
+
+    {{#each departments}}
+        <ul>
+
+            <li> {{name}}
+            <br>
+            <a href="/departments/{{id}}"> <button style="margin:8px;" class="btn btn-default"> View {{name}} department </button> </a>
+            </li>
+
+            <hr>
+        </ul>
+    {{/each}}
+
+{{/partial}}
+
+{{>layout.hbs}}

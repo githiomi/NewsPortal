@@ -1,0 +1,38 @@
+{{#partial "pagename"}}
+    {{username}}, these are all the news for the company
+{{/partial}}
+
+{{#partial "content"}}
+
+    {{#if news}}
+        <h3> <small style="text-align:center; padding: 5px; border-bottom:2px solid teal;"> These are the Company News: </small> </h3>
+        {{#each news}}
+            <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
+                <ol style="margin:8px;">
+                    <li style="margin:8px;"> News Title: {{title}}
+                        <ul>
+                            <li> Urgency: {{urgency}} </li>
+                            <br>
+                            <a href="/companynews/{{id}}"> View {{title}} details here...</a>
+                        </ul>
+                    </li>
+                    <hr>
+                </ol>
+            </div>
+        {{/each}}
+
+        <br>
+        <a href="/companynews/new"> <button class="btn btn-primary"> Add More News Items </button> </a>
+    {{else}}
+        <small>
+            Sorry, There are no news to report to the Whole Company.
+            <br><br>
+            Be the first to notify everyone of something new!
+            <br>
+            <a href="/companynews/new"> <button class="btn btn-primary"> Add A News Item </button> </a>
+        </small>
+    {{/if}}
+
+{{/partial}}
+
+{{>layout.hbs}}
