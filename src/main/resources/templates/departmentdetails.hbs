@@ -5,9 +5,10 @@
 {{#partial "content"}}
     <h3>
         Department name: {{departments.name}}
+
+        <a href="/departments/{{departments.id}}/news"> <button class="btn btn-default"> View {{departments.name}} news </button> </a>
     </h3>
 
-    <br>
     <br>
         <hr>
             {{departments.name}} has a total of {{employees}} employees.
@@ -22,6 +23,10 @@
                         <br>
                     <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a>
                 </ol>
+                <br>
+                {{username}}, as an admin, you can add an employee here:
+                <br>
+                <a href="/departments/{{departments.id}}/users/new"> <button class="btn btn-primary"> Add an employee </button> </a>
             {{/each}}
         {{else}}
             <br>

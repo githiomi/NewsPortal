@@ -130,6 +130,15 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
+        get("/companynews", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "companynews.hbs");
+        }, new HandlebarsTemplateEngine());
+
         post("/companynews", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
 
@@ -148,24 +157,15 @@ public class App {
             return new ModelAndView(model, "companynews.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/companynews/new", "application/json", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-
+//        get("/companynews/new", "application/json", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//
 //            List<Users> allUsers = usersDao.getAll();
-
+//
 //            model.put("users", allUsers);
-            model.put("username", req.session().attribute("username"));
-            return new ModelAndView(model, "newcompanynews.hbs");
-        }, new HandlebarsTemplateEngine());
-
-        get("/companynews", "application/json", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<News> allNews = newsDao.getAllNewsForCompany();
-
-            model.put("news", allNews);
-            model.put("username", req.session().attribute("username"));
-            return new ModelAndView(model, "companynews.hbs");
-        }, new HandlebarsTemplateEngine());
+//            model.put("username", req.session().attribute("username"));
+//            return new ModelAndView(model, "newcompanynews.hbs");
+//        }, new HandlebarsTemplateEngine());
 
         get("departments/:ic/users/:id", "application/json", (req, res) -> {
             Map<String,Object> model = new HashMap<>();
@@ -196,16 +196,16 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-//        get("departments/:id/users/new", "application/json", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int depId = Integer.parseInt(req.params("id"));
-//
-//            Departments retrieved = sql2oDepartments.findById(depId);
-//
-//            model.put("departments", retrieved);
-//            model.put("username", req.session().attribute("username"));
-//            return new ModelAndView(model, "newemployee.hbs");
-//        }, new HandlebarsTemplateEngine());
+        get("departments/:id/users/new", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params("id"));
+
+            Departments retrieved = sql2oDepartments.findById(depId);
+
+            model.put("departments", retrieved);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "newemployee.hbs");
+        }, new HandlebarsTemplateEngine());
 
     }
 
