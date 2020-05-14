@@ -234,6 +234,28 @@ public class App {
             return new ModelAndView(model, "newemployee.hbs");
         }, new HandlebarsTemplateEngine());
 
+        post("/departments/:id/news", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params(":id"));
+
+            String title = req.queryParams("title");
+            String urgency = req.queryParams("urgency");
+            String content = req.queryParams("content");
+            int departmentid = Integer.parseInt(req.queryParams("departmentid"));
+            int userid = Integer.parseInt(req.queryParams("userid"));
+
+            DepNews depNews = new DepNews(title, urgency, content, departmentid, userid);
+            depNewsDao.addDep(depNews);
+
+            Departments departments = sql2oDepartments.findById(depId);
+            List<DepNews> allDepNews = depNewsDao.getAllNewsForDepartment(depId);
+
+            model.put("depNews", allDepNews);
+            model.put("departments", departments);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "depNews.hbs");
+        }, new HandlebarsTemplateEngine());
+
         get("/departments/:id/news", "application/json", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             int depId = Integer.parseInt(req.params(":id"));
@@ -245,6 +267,51 @@ public class App {
             model.put("departments", departments);
             model.put("username", req.session().attribute("username"));
             return new ModelAndView(model, "depNews.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/departments/:id/news/new", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params(":id"));
+
+            Departments departments = sql2oDepartments.findById(depId);
+            List<Users> users = usersDao.getAllInDepartment(depId);
+
+            model.put("users", users);
+            model.put("departments", departments);
+            model.put("username", req.session().attribute("username"));
+            return new ModelAndView(model, "newDepNews.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/departments/:ic/news/:id", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params(":ic"));
+            int depNewsId = Integer.parseInt(req.params(":id"));
+
+            Departments departments = sql2oDepartments.findById(depId);
+            DepNews retrieved = depNewsDao.findByIdDep(depNewsId);
+            Users users = usersDao.findById(retrieved.getUserid());
+
+            model.put("departments", departments);
+            model.put("news", retrieved);
+            model.put("users", users);
+            model.put("username", req.session().attribute("username"));
+            return  new ModelAndView(model, "depnewsdetails.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/departments/:ic/news/:id/delete", "application/json", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int depId = Integer.parseInt(req.params(":ic"));
+            int newsId = Integer.parseInt(req.params(":id"));
+
+            depNewsDao.deleteByIdDep(newsId);
+
+            List<Departments> allDepartments = sql2oDepartments.getAll();
+            List<News> allNews = newsDao.getAllNewsForCompany();
+
+            model.put("news", allNews);
+            model.put("departments", allDepartments);
+            res.redirect("/departments/" + depId + "/news");
+            return null;
         }, new HandlebarsTemplateEngine());
 
     }

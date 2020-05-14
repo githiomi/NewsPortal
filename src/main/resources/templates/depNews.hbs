@@ -1,63 +1,38 @@
 {{#partial "pagename"}}
-    {{username}}, you can add a new employee to {{departments.name}}
+    {{username}}, these are the news in {{departments.name}}
 {{/partial}}
 
 {{#partial "content"}}
 
-    <div id="body" class="bg-dark">
-        <div class="col-md-8" style="margin-left:20%; border-radius:15px; background-color:teal; text-align:center">
-            <br>
-            <small style="border-bottom:2px solid teal; padding:5px;"> Add News Employee Here </small>
-            <hr>
+    <h3 style="padding:5px; border-bottom:2px solid teal">These are the news for employees in the {{departments.name}} department.</h3>
 
-            <form action="/departments/{{departments.id}}" method="post">
+    {{#if depNews}}
+        {{#each depNews}}
+            <div style="background-color:wheat; padding:20px; margin:10px; border-radius:15px; color:black;">
+                <ol style="margin:8px;">
+                    <li style="margin:8px;"> News Title: {{title}}
+                        <ul>
+                            <li> Urgency: {{urgency}} </li>
+                            <br>
+                            <a href="/departments/{{departments.id}}/news/{{id}}"> View {{title}} details here...</a>
+                        </ul>
+                    </li>
+                    <hr>
+                </ol>
+            </div>
+        {{/each}}
 
-                <div class="form-group">
-                    <label for="title"> News Title: </label>
-                    <input id="title" name="title" value="{{news.title}}" style="padding:5px; width:50%;">
-                </div>
+        <small> {{username}}, you can still add news to this department.<br>
+            <a href="/departments/{{departments.id}}/news/new"> <button class="btn btn-default"> Add News Item </button> </a>
+        </small>
+    {{else}}
 
-                <label for="urgency"> Urgency: </label>
-                <select id="urgency" name="urgency" style="padding:5px; width:50%;">
-                    <option value=""></option>
-                    <option value="Not Urgent">Not Urgent</option>
-                    <option value="Neutral Urgency">Neutral Urgency</option>
-                    <option value="Very Urgent">Very Urgent</option>
-                </select>
+        <small> Looks like there are no news within this department <br><br>
+            Be the first to add some new! <br>
+            <a href="/departments/{{departments.id}}/news/new"> <button class="btn btn-default"> Add News Item </button> </a>
+        </small>
 
-                <div style="margin:8px;" class="form-group">
-                    <label for="content"> News Content: </label>
-                    <textarea id="content" name="content" value="{{news.content}}" style="padding:5px; width:50%;"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="userid"> Created By: </label>
-                    {{#if users}}
-                        <select id="userid" name="userid" value="{{news.userid}}" style="padding:5px; width:50%;">
-                            <option value=""></option>
-                            {{#each users}}
-                                <option value="{{users.id}}">{{users.name}}</option>
-                            {{/each}}
-                        </select>
-                    {{else}}
-                        <small style="padding:5px; width:50%;"> There are no employees recorded yet. <br>
-                            Make sure to add a user first!
-                        </small>
-                    {{/if}}
-                </div>
-
-                <div class="form-group">
-                    <label for="departmentid"> Department: </label>
-                    <select id="departments" name="departments">
-                        <option value="{{departments.id}}">{{departments.name}}</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-default"> Submit </button>
-            </form>
-
-        </div>
-    </div>
+    {{/if}}
 
 {{/partial}}
 

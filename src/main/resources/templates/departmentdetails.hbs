@@ -19,9 +19,12 @@
             <br>
             {{#each users}}
                 <ol style="padding:3px;">
-                    <li> Name: {{name}}
+                    <li>
+                    Name: {{name}}
+                    <ul>
                         <br>
-                        <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a>
+                        <li> <a href="/departments/{{departments.id}}/users/{{id}}"> View {{name}} details here ... </a> </li>
+                    </ul>
                     </li>
                 </ol>
             {{/each}}
